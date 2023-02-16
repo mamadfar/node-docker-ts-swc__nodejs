@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  backend:
+  backend: # --- Node service ---
     build: .
     ports:
       - 8000:8000 # inside docker port:local machine port (PC)
@@ -10,5 +10,15 @@ services:
       - .:/usr/src/app # map the current project directory to /usr/src/app directory inside the docker
       - /usr/src/app/node_modules
     command: yarn start:docker
+    depends_on:
+      - postgres
     environment:
+      - DATABASE_URL=postgres://postgres@postgres/webapp_dev # url for connect to db - @[service name]/[db name]
       - PORT=8000
+  postgres: # --- DB service ---
+    image: postgres:15-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=webapp_dev # db name
+      - POSTGRES_HOST_AUTH_METHOD=trust

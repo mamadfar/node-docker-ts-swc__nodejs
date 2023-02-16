@@ -138,5 +138,4 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
-doc.md
 # End

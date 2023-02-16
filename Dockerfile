@@ -7,6 +7,10 @@ WORKDIR /usr/src/app
 COPY package.json pnpm-lock.yaml *yarn.lock *package-lock.json ./
 RUN npm install
 
+# Prisma
+COPY prisma/schema.prisma ./prisma/
+RUN npx prisma generate
+
 # copy everything except the files inside the .dockerignore
 COPY . .
 
