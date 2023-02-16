@@ -1,7 +1,7 @@
 
 ## Node starter
 1. npm init --y
-2. pnpm i -D typescript @types/node express @types/express morgan @types/morgan <!-- morgan => log -->
+2. pnpm i -D typescript @types/node express @types/express ts-node morgan @types/morgan <!-- morgan => log -->
 3. pnpm tsc --init
 4. pnpm i -D @tsconfig/node-lts <!-- tsconfig bases => github -->
 5. tsconfig
@@ -134,6 +134,7 @@ services:
 4. docker compose exec [container or service] [any command related to this service]
 5. docker compose build [container or service] <!-- rebuild our Dockerfile -->
 6. docker compose rm --stop [container or service] <!-- stop our container -->
+7. docker compose run [container or service] [new command] <!-- new command like 'yarn db:migrate' -->
 
 ## Postgres
 relational db
@@ -157,6 +158,22 @@ ORM to connect the backend to the db
 3. delete `.env` => cause we are using docker
 4. after create schema ==> npx prisma generate
 5. after that, we have @prisma/client to find all the types for our client side
+
+## knex
+is another helper to migration like prisma migrate
+
+1. pnpm i knex pg <!-- pg ==> postgres -->
+2. mkdir `knexfile.ts`
+```ts
+export default {
+    client: "pg",
+    connection: process.env.DATABASE_URL,
+    migration: {
+        extension: "ts"
+    }
+}
+```
+3. npx knex migrate:make init_db
 
 ## Other Deps
 1. install `trigger task on save` extension
