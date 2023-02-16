@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  backend:
+    build: .
+    ports:
+      - 8000:8000 # inside docker port:local machine port (PC)
+      - 9229:9229 # debugger port
+    volumes:
+      - .:/usr/src/app # map the current project directory to /usr/src/app directory inside the docker
+      - /usr/src/app/node_modules
+    command: yarn start:docker
+    environment:
+      - PORT=8000

@@ -7,7 +7,7 @@ const PORT = Number(process.env.PORT ?? 8080);
 app.use(morgan("dev")); //* log with some colors :) */
 
 app.get("/", (req, res) => {
-    res.json({hello: "world"})
+    res.json({hello: "Mohammad joon"})
 });
 
 app.listen(PORT, "0.0.0.0", () => { //! 0.0.0.0 is for docker (mandatory) */
