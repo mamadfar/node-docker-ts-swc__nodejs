@@ -32,7 +32,7 @@
         }
     },
     "module": {
-        "type": "commonjs"
+        "type": "es6"
     },
     "sourceMaps": "inline"
 }
@@ -41,6 +41,7 @@
 11. package.json
 ```json
 {
+  "type": "module",
   "scripts": {
     "build": "rimraf dist && swc ./src -d dist"
   },
@@ -133,8 +134,9 @@ services:
 3. docker compose restart [container name] <!-- to restart a specific container -->
 4. docker compose exec [container or service] [any command related to this service]
 5. docker compose build [container or service] <!-- rebuild our Dockerfile -->
-6. docker compose rm --stop [container or service] <!-- stop our container -->
+6. docker compose rm --stop [container or service] <!-- stop and remove our container -->
 7. docker compose run [container or service] [new command] <!-- new command like 'yarn db:migrate' -->
+8. docker stop [container or service]
 
 ## Postgres
 relational db
@@ -148,12 +150,13 @@ relational db
 
 ### db command
 1. \d <!-- show all tables -->
-2. \q <!-- exit -->
+2. \d [table name] <!-- show the table -->
+3. \q <!-- exit -->
 
 ## Prisma
 ORM to connect the backend to the db
 
-1. pnpm i -D prisma
+1. pnpm i -D prisma @prisma/client
 2. pnpx prisma init
 3. delete `.env` => cause we are using docker
 4. after create schema ==> npx prisma generate
@@ -178,3 +181,4 @@ export default {
 ## Other Deps
 1. install `trigger task on save` extension
 2. add `extensions`, `launch`, `settings`, and `tasks` .json to each project for docker and debbugging
+3. pnpm i -D nanoid <!-- generate unique ID -->
